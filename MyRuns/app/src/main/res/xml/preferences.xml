@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="main_screen"
+    >
+
+    <PreferenceCategory
+        android:title="@string/settings_tab_preferences_label">
+
+        <PreferenceScreen
+            android:title="@string/settings_tab_name_email_class"
+            android:summary="@string/settings_tab_user_profile">
+            <intent
+                android:action="com.example.evan.evansmyruns2.ProfileActivity"
+                />
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:key="privacy_setting"
+            android:title="@string/settings_tab_privacy_setting"
+            android:summary="@string/settings_tab_privacy_setting_details" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_tab_additional_settings_label"
+        android:key="additional_settings">
+
+        <ListPreference
+            android:key="unit_preferences_dialog"
+            android:title="@string/settings_tab_unit_preference"
+            android:summary="@string/settings_tab_unit_preference_details"
+            android:entries="@array/units_of_measurement_labels"
+            android:entryValues="@array/units_of_measurement_values"
+            android:dialogTitle="@string/settings_tab_unit_preference"/>
+
+        <EditTextPreference
+            android:freezesText="true"
+            android:key="comments_dialog"
+            android:title="@string/settings_tab_comments"
+            android:summary="@string/settings_tab_comments_details"
+            android:dialogTitle="@string/settings_tab_comments"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_tab_misc_label"
+        android:key="misc_pref">
+
+        <PreferenceScreen
+            android:title="@string/settings_tab_webpage"
+            android:summary="@string/settings_tab_webpage_url_normal"
+            android:key="website_launcher">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/settings_tab_webpage_url_trump" />
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

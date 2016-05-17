@@ -1,0 +1,70 @@
+package com.example.evan.evansmyruns;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.util.Log;
+
+// CREDIT: example code for camera actions
+// 
+// Ref: http://developer.android.com/reference/android/app/DialogFragment.html
+
+public class MyRunsDialogFragment extends DialogFragment {
+
+    // Different dialog IDs
+    public static final int DIALOG_ID_PHOTO_PICKER = 1;
+
+    private static final String DIALOG_ID_KEY = "dialog_id";
+
+    public static MyRunsDialogFragment newInstance(int dialog_id) {
+        MyRunsDialogFragment frag = new MyRunsDialogFragment();
+        Bundle args = new Bundle();
+        args.putInt(DIALOG_ID_KEY, dialog_id);
+        frag.setArguments(args);
+        return frag;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        int dialog_id = getArguments().getInt(DIALOG_ID_KEY);
+
+        final Activity parent = getActivity();
+
+        // Setup dialog appearance and onClick Listeners
+        switch (dialog_id) {
+            case DIALOG_ID_PHOTO_PICKER:
+                // Build picture picker dialog for choosing from camera or gallery
+                AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+                builder.setTitle("Pick Profile Picture");
+                // Set up click listener, firing intents open camera
+                DialogInterface.OnClickListener dlistener = new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+
+                        switch (item) {
+
+                            // if the user selected "open camera":
+                            case 0:
+                                ((ProfileActivity) parent)
+                                        .openCamera();
+                                break;
+                            // if the user selected "choose from gallery":
+                            case 1:
+                                ((ProfileActivity) parent)
+                                        .chooseFromGallery();
+                                break;
+                            default:
+                                Log.d("problem", "see myrunsdialogfragment 4");
+                        }
+                    }
+                };
+                // Set the item/s to display and create the dialog
+                builder.setItems(R.array.ui_profile_photo_picker_items, dlistener);
+                return builder.create();
+            default:
+                return null;
+        }
+    }
+}

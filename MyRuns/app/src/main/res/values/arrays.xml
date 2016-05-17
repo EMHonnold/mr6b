@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Settings tab: (preferences fragment) -->
+    <string-array name="units_of_measurement_labels">
+        <item>Metric (Kilometers)</item>
+        <item>Imperial (Miles)</item>
+    </string-array>
+    <string-array name="units_of_measurement_values">
+        <item>Metric</item>
+        <item>Imperial</item>
+    </string-array>
+
+
+    <string-array name="ui_profile_photo_picker_items">
+        <item>Open Camera</item>
+        <item>Select from Gallery</item>
+    </string-array>
+
+
+</resources>
