@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyRuns6</string>
+    <string name="app_name">MyRuns 6</string>
 
     <!-- Somehow required for the Google Maps fragment...
    also required: see google_maps_api.xml  -->
