@@ -10,24 +10,30 @@ package com.example.evan.evansmyruns.starttab;
  */
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.evan.evansmyruns.MainActivity;
 import com.example.evan.evansmyruns.ManualEntryActivity;
 import com.example.evan.evansmyruns.R;
+import com.example.evan.evansmyruns.ServerUtilities;
 import com.example.evan.evansmyruns.entry.ActivityType;
 import com.example.evan.evansmyruns.entry.InputType;
 import com.example.evan.evansmyruns.location.LocationService;
 import com.example.evan.evansmyruns.map.MapActivity;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 
 public class StartTab extends Fragment implements View.OnClickListener {
-
     public int randomID;
     ActivitySpinner activitySpinner;
     InputSpinner inputSpinner;
@@ -71,7 +77,47 @@ public class StartTab extends Fragment implements View.OnClickListener {
     }
 
     // Required implementation of abstract method:
-    private void onSyncClicked(View v) {}
+    private void onSyncClicked(View v) {
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            // Get history and upload it to the server.
+            protected String doInBackground(Void... arg0) {
+
+
+                // Upload the history of all entries using upload().
+                String uploadState="";
+                try {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("name", "varun");
+                    params.put("addr", "address");
+                    params.put("phone", "123123");
+
+                    ServerUtilities.post(MainActivity.SERVER_ADDR + "/add.do", params);
+                } catch (IOException e1) {
+                    uploadState = "Sync failed: " + e1.getCause();
+                    Log.e("TAGG", "data posting error " + e1);
+                }
+
+                return uploadState;
+            }
+
+            @Override
+            protected void onPostExecute(String errString) {
+                String resultString;
+                if(errString.equals("")) {
+                    resultString =  " entry uploaded.";
+                } else {
+                    resultString = errString;
+                }
+
+                Toast.makeText(getContext(), resultString,
+                        Toast.LENGTH_SHORT).show();
+
+            }
+
+        }.execute();
+    }
 
     @Override
     public void onClick(View v) {
@@ -87,4 +133,3 @@ public class StartTab extends Fragment implements View.OnClickListener {
         }
     }
 }
-

@@ -28,6 +28,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
+    public static String SERVER_ADDR = "https://helical-element-131321.appspot.com";
+
     private static final int PERMISSION_REQUEST_CAMERA = 1;
     private static final int PERMISSION_REQUEST_READ_EXTERNAL_STORAGE = 2;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 3;
@@ -164,6 +166,4 @@ public class MainActivity extends Activity {
         }
 
     }
-
-
 }
